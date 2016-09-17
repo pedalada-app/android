@@ -55,6 +55,8 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         Timber.d("Result: %s ", authResult);
 
         prefs.setToken(authResult.getToken());
+
+        prefs.saveUserdata(authResult.getName(), authResult.getPedaladas(), authResult.getPhotoUrl());
         final User user = new User(authResult.getName(), authResult
                 .getPhotoUrl(), authResult.getPedaladas());
         loginView.proceedToNext(user);

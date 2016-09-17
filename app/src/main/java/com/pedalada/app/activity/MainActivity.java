@@ -4,25 +4,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.TextView;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
 
+import com.pedalada.app.MyApplication;
 import com.pedalada.app.R;
-import com.pedalada.app.model.objects.User;
+import com.pedalada.app.model.Prefs;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
 
-    private static final String EXTRA_USER = "user";
+    @BindView(R.id.main_navview)
+    NavigationView navigationView;
 
-    @BindView(R.id.main_name)
-    TextView name;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
-    public static void start(Context context, User user) {
+    @BindView(R.id.main_drawer)
+    DrawerLayout drawerLayout;
+
+    public static void start(Context context) {
 
         Intent starter = new Intent(context, MainActivity.class);
-        starter.putExtra(EXTRA_USER, user);
         context.startActivity(starter);
     }
 
@@ -31,11 +37,16 @@ public class MainActivity extends BaseActivity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        final Prefs prefs = MyApplication.get(this).getPrefs();
+        if (!prefs.isLoggedin()) {
+            LoginActivity.start(this);
+            return;
+        }
+
+        setContentView(R.layout.screen_main);
         ButterKnife.bind(this);
 
-        final User user = getIntent().getExtras().getParcelable(EXTRA_USER);
-        name.setText(user.getName());
+        setSupportActionBar(toolbar);
 
     }
 

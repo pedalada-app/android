@@ -71,7 +71,7 @@ public class FixtureViewHolder extends ChildViewHolder {
 
     }
 
-    public void bind(Fixture fixture, Bet fixBet, BetClickListener listener) {
+    public void bind(Fixture fixture, Bet currentBet, BetClickListener listener) {
 
         homeTeam.setText(fixture.getHomeTeam().getName());
         awayTeam.setText(fixture.getAwayTeam().getName());
@@ -81,16 +81,30 @@ public class FixtureViewHolder extends ChildViewHolder {
         awayTeamOdds.setText(formatedOdds(fixtureOdds.getAwayWin()));
         drawOdds.setText(formatedOdds(fixtureOdds.getDraw()));
 
-        updateListener(homeBetButtonListener, fixture, Bet.HOME, fixBet, listener);
-        updateListener(awayBetButtonListener, fixture, Bet.AWAY, fixBet, listener);
-        updateListener(drawBetButtonListener, fixture, Bet.DRAW, fixBet, listener);
+        updateListener(homeBetButtonListener, fixture, Bet.HOME, currentBet, listener);
+        updateListener(awayBetButtonListener, fixture, Bet.AWAY, currentBet, listener);
+        updateListener(drawBetButtonListener, fixture, Bet.DRAW, currentBet, listener);
+
+        switch (currentBet) {
+            case HOME:
+                homeTeamWrapper.setBackgroundResource(R.color.fixture_bet_click);
+                break;
+            case AWAY:
+                awayWrapper.setBackgroundResource(R.color.fixture_bet_click);
+                break;
+            case DRAW:
+                drawWrapper.setBackgroundResource(R.color.fixture_bet_click);
+                break;
+            case NONE:
+                break;
+        }
 
     }
 
     @NonNull
-    private String formatedOdds(double awayWin) {
+    private String formatedOdds(double odd) {
 
-        return MessageFormat.format("({0})", awayWin);
+        return MessageFormat.format("({0})", odd);
     }
 
     private void updateListener(BetButtonListener clickBetButtonListener, Fixture fixture, Bet listenerBet, Bet currentBet, BetClickListener listener) {

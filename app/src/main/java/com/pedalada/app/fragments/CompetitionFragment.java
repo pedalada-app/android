@@ -17,6 +17,7 @@ import com.pedalada.app.MyApplication;
 import com.pedalada.app.R;
 import com.pedalada.app.adapter.CompetitionAdapter;
 import com.pedalada.app.model.Bet;
+import com.pedalada.app.model.FixtureBet;
 import com.pedalada.app.model.network.BackendService;
 import com.pedalada.app.model.objects.Competition;
 import com.pedalada.app.model.objects.Fixture;
@@ -87,7 +88,6 @@ public class CompetitionFragment extends BaseFragment implements CompetitionView
 
         final Context context = getContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         adapter = new CompetitionAdapter(context, Lists.newArrayList(), this);

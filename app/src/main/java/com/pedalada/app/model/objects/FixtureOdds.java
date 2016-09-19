@@ -3,6 +3,8 @@ package com.pedalada.app.model.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.pedalada.app.model.Bet;
+
 public class FixtureOdds implements Parcelable {
 
     public static final Parcelable.Creator<FixtureOdds> CREATOR = new Parcelable.Creator<FixtureOdds>() {
@@ -81,5 +83,20 @@ public class FixtureOdds implements Parcelable {
         dest.writeDouble(this.homeWin);
         dest.writeDouble(this.awayWin);
         dest.writeDouble(this.draw);
+    }
+
+    public double get(Bet bet) {
+
+        switch (bet) {
+            case HOME:
+                return homeWin;
+            case AWAY:
+                return awayWin;
+            case DRAW:
+                return draw;
+            default:
+                throw new IllegalStateException("No odds");
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package com.pedalada.app.view;
 
 import com.pedalada.app.model.Bet;
+import com.pedalada.app.model.FixtureBet;
 import com.pedalada.app.model.objects.Competition;
 import com.pedalada.app.model.objects.Fixture;
 
@@ -24,28 +25,5 @@ public interface CompetitionView extends BaseView {
     Observable<FixtureBet> bets();
 
     Observable<Void> submitForm();
-
-    class FixtureBet {
-
-        private Fixture fixture;
-
-        private Bet bet;
-
-        public FixtureBet(Fixture fixture, Bet bet) {
-
-            this.fixture = fixture;
-            this.bet = bet;
-        }
-
-        public Bet getBet() {
-
-            return bet;
-        }
-
-        public Fixture getFixture() {
-
-            return fixture;
-        }
-    }
 
 }

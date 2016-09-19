@@ -1,6 +1,7 @@
 package com.pedalada.app.presenter;
 
 import com.google.common.collect.Maps;
+import com.pedalada.app.model.FixtureBet;
 import com.pedalada.app.model.objects.Competition;
 import com.pedalada.app.model.objects.Fixture;
 import com.pedalada.app.model.objects.FixtureResponse;
@@ -68,7 +69,7 @@ public class CompetitionPresenter extends BasePresenter<CompetitionView> {
 
     }
 
-    private void newBet(CompetitionView.FixtureBet fixtureBet) {
+    private void newBet(FixtureBet fixtureBet) {
 
         currentForm.addBet(fixtureBet.getFixture(), fixtureBet.getBet());
 

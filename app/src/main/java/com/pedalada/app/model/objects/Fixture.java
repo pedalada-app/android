@@ -37,18 +37,10 @@ public class Fixture implements Parcelable {
 
     private FixtureResult result;
 
+    private FixtureStatus fixtureStatus;
+
     public Fixture() {
 
-    }
-
-    public Fixture(String fixtureId, TeamInfo homeTeam, TeamInfo awayTeam, FixtureOdds odds, Date date, FixtureResult result) {
-
-        this.fixtureId = fixtureId;
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.odds = odds;
-        this.date = date;
-        this.result = result;
     }
 
     protected Fixture(Parcel in) {
@@ -60,6 +52,8 @@ public class Fixture implements Parcelable {
         long tmpDate = in.readLong();
         this.date = tmpDate == -1 ? null : new Date(tmpDate);
         this.result = in.readParcelable(FixtureResult.class.getClassLoader());
+        int tmpFixtureStatus = in.readInt();
+        this.fixtureStatus = tmpFixtureStatus == -1 ? null : FixtureStatus.values()[tmpFixtureStatus];
     }
 
     @Override
@@ -123,6 +117,11 @@ public class Fixture implements Parcelable {
         return result;
     }
 
+    public FixtureStatus getFixtureStatus() {
+
+        return fixtureStatus;
+    }
+
     @Override
     public int describeContents() {
 
@@ -138,6 +137,6 @@ public class Fixture implements Parcelable {
         dest.writeParcelable(this.odds, flags);
         dest.writeLong(this.date != null ? this.date.getTime() : -1);
         dest.writeParcelable(this.result, flags);
+        dest.writeInt(this.fixtureStatus == null ? -1 : this.fixtureStatus.ordinal());
     }
-
 }

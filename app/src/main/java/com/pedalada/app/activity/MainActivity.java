@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.pedalada.app.MyApplication;
 import com.pedalada.app.R;
+import com.pedalada.app.fragments.CompetitionFragment;
 import com.pedalada.app.model.Prefs;
 
 import butterknife.BindView;
@@ -47,6 +48,10 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+
+        getSupportFragmentManager().beginTransaction()
+                                   .add(R.id.main_content, CompetitionFragment.newInstance())
+                                   .commit();
 
     }
 

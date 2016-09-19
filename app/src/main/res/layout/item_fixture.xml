@@ -2,30 +2,59 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="horizontal"
-              android:padding="10dp">
+              android:padding="4dp">
 
-    <TextView
-        android:id="@+id/item_fixture_hometeam"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        tools:text="Chelsea"/>
+    <RelativeLayout
+        android:id="@+id/item_fixture_hometeam_wrapper"
+        style="@style/item_fixture_team_wrapper">
 
-    <TextView
-        android:id="@+id/item_fixture_draw"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:text="X"/>
+        <TextView
+            android:id="@+id/item_fixture_hometeam"
+            style="@style/item_fixture_team_name"
+            tools:text="Chelsea"/>
 
-    <TextView
-        android:id="@+id/item_fixture_awayteam"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:layout_weight="3"
-        tools:text="Chelsea"/>
+        <TextView
+            android:id="@+id/item_fixture_hometeam_odds"
+            style="@style/item_fixture_team_odd"
+            android:layout_below="@id/item_fixture_hometeam"
+            tools:text="(1.3)"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/item_fixture_draw_wrapper"
+        style="@style/item_fixture_team_wrapper">
+
+        <TextView
+            android:id="@+id/item_fixture_draw"
+            style="@style/item_fixture_team_name"
+            android:text="@string/draw"/>
+
+
+        <TextView
+            android:id="@+id/item_fixture_draw_odds"
+            style="@style/item_fixture_team_odd"
+            android:layout_below="@id/item_fixture_draw"
+            tools:text="(1.3)"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/item_fixture_away_wrapper"
+        style="@style/item_fixture_team_wrapper">
+
+        <TextView
+            android:id="@+id/item_fixture_awayteam"
+            style="@style/item_fixture_team_name"
+            tools:text="Chelsea"/>
+
+        <TextView
+            android:id="@+id/item_fixture_awayteam_odds"
+            style="@style/item_fixture_team_odd"
+            android:layout_below="@id/item_fixture_awayteam"
+            tools:text="(1.3)"/>
+    </RelativeLayout>
 
 </LinearLayout>

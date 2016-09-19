@@ -10,6 +10,18 @@ public class AuthResult {
 
     private int pedaladas;
 
+    public AuthResult() {
+
+    }
+
+    public AuthResult(String token, String name, String photoUrl, int pedaladas) {
+
+        this.token = token;
+        this.name = name;
+        this.photoUrl = photoUrl;
+        this.pedaladas = pedaladas;
+    }
+
     @Override
     public String toString() {
 

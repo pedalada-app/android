@@ -26,7 +26,7 @@ public class Competition implements Parcelable, ParentListItem {
         }
     };
 
-    private String id;
+    private String compId;
 
     private String name;
 
@@ -40,9 +40,18 @@ public class Competition implements Parcelable, ParentListItem {
 
     }
 
+    public Competition(String compId, String name, String matchday, String logo, List<Fixture> fixtures) {
+
+        this.compId = compId;
+        this.name = name;
+        this.matchday = matchday;
+        this.logo = logo;
+        this.fixtures = fixtures;
+    }
+
     protected Competition(Parcel in) {
 
-        this.id = in.readString();
+        this.compId = in.readString();
         this.name = in.readString();
         this.matchday = in.readString();
         this.logo = in.readString();
@@ -52,16 +61,16 @@ public class Competition implements Parcelable, ParentListItem {
     public String toString() {
 
         return "Competition{" +
-                "id='" + id + '\'' +
+                "compId='" + compId + '\'' +
                 ", name='" + name + '\'' +
                 ", matchday='" + matchday + '\'' +
                 ", logo='" + logo + '\'' +
                 '}';
     }
 
-    public String getId() {
+    public String getCompId() {
 
-        return id;
+        return compId;
     }
 
     public String getName() {
@@ -100,7 +109,7 @@ public class Competition implements Parcelable, ParentListItem {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
-        dest.writeString(this.id);
+        dest.writeString(this.compId);
         dest.writeString(this.name);
         dest.writeString(this.matchday);
         dest.writeString(this.logo);

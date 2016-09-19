@@ -1,12 +1,48 @@
 package com.pedalada.app.model.objects;
 
-public class FixtureOdds {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class FixtureOdds implements Parcelable {
+
+    public static final Parcelable.Creator<FixtureOdds> CREATOR = new Parcelable.Creator<FixtureOdds>() {
+
+        @Override
+        public FixtureOdds createFromParcel(Parcel source) {
+
+            return new FixtureOdds(source);
+        }
+
+        @Override
+        public FixtureOdds[] newArray(int size) {
+
+            return new FixtureOdds[size];
+        }
+    };
 
     private double homeWin;
 
     private double awayWin;
 
     private double draw;
+
+    public FixtureOdds() {
+
+    }
+
+    public FixtureOdds(double homeWin, double awayWin, double draw) {
+
+        this.homeWin = homeWin;
+        this.awayWin = awayWin;
+        this.draw = draw;
+    }
+
+    protected FixtureOdds(Parcel in) {
+
+        this.homeWin = in.readDouble();
+        this.awayWin = in.readDouble();
+        this.draw = in.readDouble();
+    }
 
     @Override
     public String toString() {
@@ -31,5 +67,19 @@ public class FixtureOdds {
     public double getDraw() {
 
         return draw;
+    }
+
+    @Override
+    public int describeContents() {
+
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeDouble(this.homeWin);
+        dest.writeDouble(this.awayWin);
+        dest.writeDouble(this.draw);
     }
 }

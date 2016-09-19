@@ -6,14 +6,24 @@ public class FixtureResponse {
 
     private String competitionId;
 
-    private List<Fixture> fixtureList;
+    private List<Fixture> fixtures;
+
+    public FixtureResponse() {
+
+    }
+
+    public FixtureResponse(String competitionId, List<Fixture> fixtures) {
+
+        this.competitionId = competitionId;
+        this.fixtures = fixtures;
+    }
 
     @Override
     public String toString() {
 
         return "FixtureResponse{" +
                 "competitionId='" + competitionId + '\'' +
-                ", fixtureList=" + fixtureList +
+                ", fixtures=" + fixtures +
                 '}';
     }
 
@@ -22,8 +32,8 @@ public class FixtureResponse {
         return competitionId;
     }
 
-    public List<Fixture> getFixtureList() {
+    public List<Fixture> getFixtures() {
 
-        return fixtureList;
+        return fixtures;
     }
 }

@@ -1,10 +1,10 @@
 package com.pedalada.app.presenter;
 
 import com.facebook.login.LoginManager;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.pedalada.app.model.Prefs;
 import com.pedalada.app.model.network.BackendService;
 import com.pedalada.app.model.objects.AuthResult;
-import com.pedalada.app.model.objects.User;
 import com.pedalada.app.view.LoginView;
 
 import rx.Subscription;
@@ -33,7 +33,8 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
         final Subscription subscription = view.successfulLogin()
                                               .flatMap(result -> backendService.auth(result.getAccessToken()
-                                                                                           .getToken(), null))
+                                                                                           .getToken(), null,
+                                                      FirebaseInstanceId.getInstance().getToken()))
                                               .subscribe(this::successfulSignin, this::unsuccessfulSignin,
                                                       view::hideProgress);
 
@@ -57,8 +58,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         prefs.setToken(authResult.getToken());
 
         prefs.saveUserdata(authResult.getName(), authResult.getPedaladas(), authResult.getPhotoUrl());
-        final User user = new User(authResult.getName(), authResult
-                .getPhotoUrl(), authResult.getPedaladas());
-        loginView.proceedToNext(user);
+
+        loginView.proceedToNext();
     }
 }

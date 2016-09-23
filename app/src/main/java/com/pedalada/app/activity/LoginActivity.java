@@ -122,7 +122,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     }
 
     @Override
-    public void proceedToNext(User user) {
+    public void proceedToNext() {
 
         MainActivity.start(this);
 

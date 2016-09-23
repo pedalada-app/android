@@ -4,10 +4,17 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/competition_pedalada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/competition_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/competition_pedalada">
 
 
     </android.support.v7.widget.RecyclerView>

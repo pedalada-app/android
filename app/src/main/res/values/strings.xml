@@ -3,4 +3,9 @@
     <string name="facebook_app_id">1161779517200969</string>
     <string name="draw">X</string>
     <string name="betting_summary_send">Send</string>
+    <string name="drawer_open">Drawer open</string>
+    <string name="drawer_close">Drawer Close</string>
+    <string name="currency_text">Pedalada</string>
+    <string name="nav_forms">Forms</string>
+    <string name="nav_home">Home</string>
 </resources>

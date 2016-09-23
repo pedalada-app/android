@@ -9,6 +9,8 @@ import com.pedalada.app.R;
 import com.pedalada.app.model.Bet;
 import com.pedalada.app.model.objects.Fixture;
 import com.pedalada.app.model.objects.FixtureOdds;
+import com.pedalada.app.model.objects.FixtureResult;
+import com.pedalada.app.model.objects.FixtureStatus;
 
 import java.text.MessageFormat;
 
@@ -73,31 +75,50 @@ public class FixtureViewHolder extends ChildViewHolder {
 
     public void bind(Fixture fixture, Bet currentBet, BetClickListener listener) {
 
+
         homeTeam.setText(fixture.getHomeTeam().getName());
         awayTeam.setText(fixture.getAwayTeam().getName());
 
-        final FixtureOdds fixtureOdds = fixture.getOdds();
-        homeTeamOdds.setText(formatedOdds(fixtureOdds.getHomeWin()));
-        awayTeamOdds.setText(formatedOdds(fixtureOdds.getAwayWin()));
-        drawOdds.setText(formatedOdds(fixtureOdds.getDraw()));
+        final FixtureResult result = fixture.getResult();
+        if (true || fixture.getFixtureStatus() == FixtureStatus.TIMED) {
 
-        updateListener(homeBetButtonListener, fixture, Bet.HOME, currentBet, listener);
-        updateListener(awayBetButtonListener, fixture, Bet.AWAY, currentBet, listener);
-        updateListener(drawBetButtonListener, fixture, Bet.DRAW, currentBet, listener);
+            final FixtureOdds fixtureOdds = fixture.getOdds();
+            homeTeamOdds.setText(formatedOdds(fixtureOdds.getHomeWin()));
+            awayTeamOdds.setText(formatedOdds(fixtureOdds.getAwayWin()));
+            drawOdds.setText(formatedOdds(fixtureOdds.getDraw()));
 
-        switch (currentBet) {
-            case HOME:
-                homeTeamWrapper.setBackgroundResource(R.color.fixture_bet_click);
-                break;
-            case AWAY:
-                awayWrapper.setBackgroundResource(R.color.fixture_bet_click);
-                break;
-            case DRAW:
-                drawWrapper.setBackgroundResource(R.color.fixture_bet_click);
-                break;
-            case NONE:
-                break;
+            drawWrapper.setVisibility(View.VISIBLE);
+            homeTeamWrapper.setClickable(true);
+            awayWrapper.setClickable(true);
+
+            updateListener(homeBetButtonListener, fixture, Bet.HOME, currentBet, listener);
+            updateListener(awayBetButtonListener, fixture, Bet.AWAY, currentBet, listener);
+            updateListener(drawBetButtonListener, fixture, Bet.DRAW, currentBet, listener);
+
+            switch (currentBet) {
+                case HOME:
+                    homeTeamWrapper.setBackgroundResource(R.color.fixture_bet_click);
+                    break;
+                case AWAY:
+                    awayWrapper.setBackgroundResource(R.color.fixture_bet_click);
+                    break;
+                case DRAW:
+                    drawWrapper.setBackgroundResource(R.color.fixture_bet_click);
+                    break;
+                case NONE:
+                    break;
+            }
+        } else {
+
+            drawWrapper.setVisibility(View.INVISIBLE);
+            homeTeamWrapper.setClickable(false);
+            awayWrapper.setClickable(false);
+
+            homeTeamOdds.setText(String.format("%d", result.getHomeTeamGoals()));
+            awayTeamOdds.setText(String.format("%d", result.getAwayTeamGoals()));
+
         }
+
 
     }
 

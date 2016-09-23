@@ -11,5 +11,5 @@ public interface LoginView extends BaseView {
 
     void showLoginError();
 
-    void proceedToNext(User user);
+    void proceedToNext();
 }

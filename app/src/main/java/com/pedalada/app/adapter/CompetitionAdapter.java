@@ -87,7 +87,7 @@ public class CompetitionAdapter extends ExpandableRecyclerAdapter<CompetitionVie
 
         parentItemList.addAll(competitionList);
 
-        notifyItemRangeInserted(0, competitionList.size());
+        notifyChange();
     }
 
     public void updateItems(Map<String, List<Fixture>> compToFixtures) {
@@ -109,6 +109,17 @@ public class CompetitionAdapter extends ExpandableRecyclerAdapter<CompetitionVie
 
         betMap.put(fixture.getFixtureId(), bet);
 
+        notifyChange();
+    }
+
+    private void notifyChange() {
+
         notifyParentItemRangeChanged(0, parentItemList.size());
+    }
+
+    public void removeAllBets() {
+
+        betMap.clear();
+        notifyChange();
     }
 }

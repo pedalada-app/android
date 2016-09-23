@@ -3,6 +3,9 @@ package com.pedalada.app.model;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import rx.Observable;
+import rx.subjects.PublishSubject;
+
 public class Prefs {
 
     private static final String ACCESS_TOKEN = "access-token";
@@ -16,6 +19,8 @@ public class Prefs {
     private final SharedPreferences sharedPreferences;
 
     private int pedaladaCount = -1;
+
+    private PublishSubject<Integer> pedaladaSubject = PublishSubject.create();
 
     public Prefs(Context context) {
 
@@ -42,12 +47,28 @@ public class Prefs {
 
         pedaladaCount += pedaladas;
 
+        pedaladaSubject.onNext(pedaladaCount);
         sharedPreferences.edit().putInt(PREF_PEDALADA, pedaladaCount).apply();
     }
 
     public int getPedaladaCount() {
 
         return sharedPreferences.getInt(PREF_PEDALADA, -1);
+
+    }
+
+    public Observable<Integer> getPedaladaObservable() {
+
+        return pedaladaSubject;
+
+    }
+
+    public void setPedalada(int pedalada) {
+
+        this.pedaladaCount = pedalada;
+
+        pedaladaSubject.onNext(pedalada);
+        sharedPreferences.edit().putInt(PREF_PEDALADA, pedalada).apply();
 
     }
 

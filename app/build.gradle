@@ -32,7 +32,7 @@ android {
         }
         debug {
             buildConfigField "boolean", "REPORT_CRASHES", "false"
-            buildConfigField "String", "BACKEND_URL", $/"http://132.65.248.60:8080/"/$
+            buildConfigField "String", "BACKEND_URL", $/"http://132.65.120.145:8080/"/$
         }
     }
 
@@ -112,6 +112,8 @@ dependencies {
     // apache commons
     compile 'org.apache.commons:commons-lang3:3.4'
 
+    compile 'com.google.firebase:firebase-core:9.6.0'
+    compile 'com.google.firebase:firebase-messaging:9.6.0'
 
 }
 retrolambda {
@@ -119,3 +121,5 @@ retrolambda {
     oldJdk oldJdk_path
     javaVersion JavaVersion.VERSION_1_7
 }
+
+apply plugin: 'com.google.gms.google-services'

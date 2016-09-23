@@ -2,6 +2,7 @@ package com.pedalada.app.view;
 
 import com.pedalada.app.model.Bet;
 import com.pedalada.app.model.FixtureBet;
+import com.pedalada.app.model.network.BettingForm;
 import com.pedalada.app.model.objects.Competition;
 import com.pedalada.app.model.objects.Fixture;
 
@@ -20,10 +21,18 @@ public interface CompetitionView extends BaseView {
 
     void hideSubmitFormButton();
 
-    void addBet(Fixture fixture, Bet bet);
+    void updateFixture(Fixture fixture, Bet bet);
 
     Observable<FixtureBet> bets();
 
     Observable<Void> submitForm();
+
+    void showSummary(BettingForm currentForm);
+
+    void updatePedalada(int integer);
+
+    void restart();
+
+    void dailyBonusMessage(int dailyChange);
 
 }

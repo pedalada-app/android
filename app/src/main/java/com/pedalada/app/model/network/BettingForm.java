@@ -1,4 +1,4 @@
-package com.pedalada.app.presenter;
+package com.pedalada.app.model.network;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -44,13 +44,19 @@ public class BettingForm implements Parcelable {
     protected BettingForm(Parcel in) {
 
         int betMapSize = in.readInt();
-        this.betMap = new HashMap<Fixture, Bet>(betMapSize);
+        this.betMap = new HashMap<>(betMapSize);
         for (int i = 0; i < betMapSize; i++) {
             Fixture key = in.readParcelable(Fixture.class.getClassLoader());
             int tmpValue = in.readInt();
             Bet value = tmpValue == -1 ? null : Bet.values()[tmpValue];
             this.betMap.put(key, value);
         }
+    }
+
+    public int activeBets() {
+
+        return betMap.size();
+
     }
 
     public void addBet(Fixture fixture, Bet bet) {
@@ -60,9 +66,20 @@ public class BettingForm implements Parcelable {
         // todo logic
 
         if (bet == Bet.NONE) {
+
+            final Bet lastBet = betMap.get(fixture);
+            final double odds = fixture.getOdds().get(lastBet);
+
+            totalOdds = totalOdds / odds;
+
             betMap.remove(fixture);
 
         } else {
+
+            final double odds = fixture.getOdds().get(bet);
+
+            totalOdds *= odds;
+
             betMap.put(fixture, bet);
         }
 
@@ -97,4 +114,8 @@ public class BettingForm implements Parcelable {
         return betsList;
     }
 
+    public int calculateExpectedRevenue(int bettingAmmount) {
+
+        return (int) totalOdds * bettingAmmount;
+    }
 }

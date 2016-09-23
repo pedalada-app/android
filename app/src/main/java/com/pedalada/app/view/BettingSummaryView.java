@@ -13,4 +13,10 @@ public interface BettingSummaryView extends BaseView {
     Observable<Void> submitObservable();
 
     Observable<Integer> pedaladaChoosenObs();
+
+    void showExpectedRevenue(double expectedRevenue);
+
+    void hide();
+
+    void setMaxPedaladas(int val);
 }

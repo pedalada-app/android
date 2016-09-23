@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+
+    <TextView
+        android:id="@+id/form_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Nov 9"/>
+
+    <TextView
+        android:id="@+id/form_pedalada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        tools:text="Betting pedaladas: 50"/>
+
+    <TextView
+        android:id="@+id/form_expected_revenue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        tools:text="Expected Winning: 150"/>
+
+    <TextView
+        android:id="@+id/form_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        tools:text="Status: IN PROGRESS"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/form_fixtures_list"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

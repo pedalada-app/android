@@ -2,6 +2,9 @@ package com.pedalada.app.presenter;
 
 import com.google.common.collect.Maps;
 import com.pedalada.app.model.FixtureBet;
+import com.pedalada.app.model.Prefs;
+import com.pedalada.app.model.network.BackendService;
+import com.pedalada.app.model.network.BettingForm;
 import com.pedalada.app.model.objects.Competition;
 import com.pedalada.app.model.objects.Fixture;
 import com.pedalada.app.model.objects.FixtureResponse;
@@ -18,19 +21,24 @@ import rx.Subscription;
 
 public class CompetitionPresenter extends BasePresenter<CompetitionView> {
 
+    private final BackendService backendService;
 
     private final CompetitionRepository competitionRepository;
 
     private final FixtureRepository fixtureRepository;
 
+    private final Prefs prefs;
+
     private CompetitionView view;
 
     private BettingForm currentForm = new BettingForm();
 
-    public CompetitionPresenter(CompetitionRepository competitionRepository, FixtureRepository fixtureRepository) {
+    public CompetitionPresenter(BackendService backendService, CompetitionRepository competitionRepository, FixtureRepository fixtureRepository, Prefs prefs) {
 
+        this.backendService = backendService;
         this.competitionRepository = competitionRepository;
         this.fixtureRepository = fixtureRepository;
+        this.prefs = prefs;
     }
 
     @Override
@@ -40,6 +48,15 @@ public class CompetitionPresenter extends BasePresenter<CompetitionView> {
 
         view.showProgress();
         view.hideSubmitFormButton();
+
+        final Subscription subscription1 = backendService.checkIn().subscribe(res -> {
+            prefs.setPedalada(res.getPedaladas());
+
+            if (res.getDailyChange() > 0) {
+                view.dailyBonusMessage(res.getDailyChange());
+            }
+        }, RxUtils::onError);
+        addSubscriptions(subscription1);
 
         final Observable<List<Competition>> competitionList = competitionRepository.getCompetitionList()
                                                                                    .share();
@@ -60,24 +77,32 @@ public class CompetitionPresenter extends BasePresenter<CompetitionView> {
         }, RxUtils::onError);
         addSubscriptions(submitFormSub);
 
+        final Subscription subscription = Observable.concat(Observable.just(prefs.getPedaladaCount()), prefs
+                .getPedaladaObservable())
+                                                    .subscribe(view::updatePedalada, RxUtils::onError);
+        addSubscriptions(subscription);
     }
 
     private void sendForm(BettingForm currentForm) {
 
         this.currentForm = new BettingForm();
         view.hideSubmitFormButton();
+        view.restart();
+
+        view.showSummary(currentForm);
 
     }
 
     private void newBet(FixtureBet fixtureBet) {
 
         currentForm.addBet(fixtureBet.getFixture(), fixtureBet.getBet());
+        view.updateFixture(fixtureBet.getFixture(), fixtureBet.getBet());
 
-        view.showSubmitFormButton();
-
-        view.addBet(fixtureBet.getFixture(), fixtureBet.getBet());
-
-        // todo logic to hide if no games
+        if (this.currentForm.activeBets() == 0) {
+            view.hideSubmitFormButton();
+        } else {
+            view.showSubmitFormButton();
+        }
     }
 
     private void onFixtureResponse(List<FixtureResponse> fixtureResponses) {

@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.common.collect.Lists;
 import com.jakewharton.rxbinding.view.RxView;
@@ -18,7 +20,9 @@ import com.pedalada.app.R;
 import com.pedalada.app.adapter.CompetitionAdapter;
 import com.pedalada.app.model.Bet;
 import com.pedalada.app.model.FixtureBet;
+import com.pedalada.app.model.Prefs;
 import com.pedalada.app.model.network.BackendService;
+import com.pedalada.app.model.network.BettingForm;
 import com.pedalada.app.model.objects.Competition;
 import com.pedalada.app.model.objects.Fixture;
 import com.pedalada.app.model.repository.CompetitionRepository;
@@ -44,6 +48,9 @@ public class CompetitionFragment extends BaseFragment implements CompetitionView
     @BindView(R.id.competition_send_form)
     FloatingActionButton sendForm;
 
+    @BindView(R.id.competition_pedalada)
+    TextView pedaladasCount;
+
     private CompetitionAdapter adapter;
 
     private CompetitionPresenter presenter;
@@ -66,10 +73,11 @@ public class CompetitionFragment extends BaseFragment implements CompetitionView
 
         final MyApplication myApplication = MyApplication.get(getContext());
         BackendService backendService = myApplication.getBackendService();
+        final Prefs prefs = myApplication.getPrefs();
 
         CompetitionRepository competitionRepository = new CompetitionRepository(backendService);
         FixtureRepository fixturePreseneter = new FixtureRepository(backendService);
-        presenter = new CompetitionPresenter(competitionRepository, fixturePreseneter);
+        presenter = new CompetitionPresenter(backendService, competitionRepository, fixturePreseneter, prefs);
     }
 
     @Nullable
@@ -106,7 +114,7 @@ public class CompetitionFragment extends BaseFragment implements CompetitionView
 
         adapter.addItems(competitionList);
 
-        getActivity().runOnUiThread(() -> adapter.notifyParentItemRangeInserted(0, 12));
+        getActivity().runOnUiThread(() -> adapter.notifyParentItemRangeInserted(0, competitionList.size()));
 
     }
 
@@ -117,6 +125,7 @@ public class CompetitionFragment extends BaseFragment implements CompetitionView
 
         adapter.updateItems(compToFixtures);
 
+        getActivity().runOnUiThread(() -> adapter.notifyParentItemRangeInserted(0, 12));
         getActivity().runOnUiThread(() -> adapter.notifyDataSetChanged());
     }
 
@@ -135,7 +144,7 @@ public class CompetitionFragment extends BaseFragment implements CompetitionView
     }
 
     @Override
-    public void addBet(Fixture fixture, Bet bet) {
+    public void updateFixture(Fixture fixture, Bet bet) {
 
         adapter.addBet(fixture, bet);
 
@@ -151,6 +160,35 @@ public class CompetitionFragment extends BaseFragment implements CompetitionView
     public Observable<Void> submitForm() {
 
         return RxView.clicks(sendForm);
+    }
+
+    @Override
+    public void showSummary(BettingForm currentForm) {
+
+        final BettingSummaryFragment summaryFragment = BettingSummaryFragment.newInstance(currentForm);
+
+        summaryFragment.show(getActivity().getFragmentManager(), null);
+    }
+
+    @Override
+    public void updatePedalada(int integer) {
+
+        pedaladasCount.setText(String.format("Pedaladas: %s", integer));
+
+    }
+
+    @Override
+    public void restart() {
+
+        adapter.removeAllBets();
+
+    }
+
+    @Override
+    public void dailyBonusMessage(int dailyChange) {
+
+        Toast.makeText(getContext(), String.format("You received your daily bonus of %s pedaladas!", dailyChange), Toast.LENGTH_SHORT)
+             .show();
     }
 
     @Override

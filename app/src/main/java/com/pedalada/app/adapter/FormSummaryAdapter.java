@@ -12,13 +12,13 @@ import com.pedalada.app.viewholder.BetSummaryViewHolder;
 
 import java.util.List;
 
-public class BettingSummaryAdapter extends RecyclerView.Adapter<BetSummaryViewHolder> {
+public class FormSummaryAdapter extends RecyclerView.Adapter<BetSummaryViewHolder> {
 
     private final LayoutInflater layoutInflater;
 
     private final List<FixtureBet> bets;
 
-    public BettingSummaryAdapter(Context context, List<FixtureBet> bets) {
+    public FormSummaryAdapter(Context context, List<FixtureBet> bets) {
 
         this.bets = bets;
 
@@ -46,5 +46,11 @@ public class BettingSummaryAdapter extends RecyclerView.Adapter<BetSummaryViewHo
     public int getItemCount() {
 
         return bets.size();
+    }
+
+    public void showList(List<FixtureBet> betList) {
+
+        bets.addAll(betList);
+
     }
 }

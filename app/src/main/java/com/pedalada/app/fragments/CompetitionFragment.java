@@ -104,6 +104,13 @@ public class CompetitionFragment extends BaseFragment implements CompetitionView
 
         presenter.attachView(this);
 
+    }
+
+    @Override
+    public void onDestroyView() {
+
+        super.onDestroyView();
+        presenter.detachView();
 
     }
 
@@ -125,8 +132,8 @@ public class CompetitionFragment extends BaseFragment implements CompetitionView
 
         adapter.updateItems(compToFixtures);
 
-        getActivity().runOnUiThread(() -> adapter.notifyParentItemRangeInserted(0, 12));
-        getActivity().runOnUiThread(() -> adapter.notifyDataSetChanged());
+        getActivity().runOnUiThread(() -> adapter.notifyParentItemRangeInserted(0, adapter.getParentItemList()
+                                                                                          .size()));
     }
 
     @Override
@@ -173,7 +180,7 @@ public class CompetitionFragment extends BaseFragment implements CompetitionView
     @Override
     public void updatePedalada(int integer) {
 
-        pedaladasCount.setText(String.format("Pedaladas: %s", integer));
+        getActivity().runOnUiThread(() -> pedaladasCount.setText(String.format("Pedaladas: %s", integer)));
 
     }
 
@@ -182,6 +189,8 @@ public class CompetitionFragment extends BaseFragment implements CompetitionView
 
         adapter.removeAllBets();
 
+        getActivity().runOnUiThread(() -> adapter.notifyItemRangeChanged(0, adapter.getParentItemList()
+                                                                                   .size()));
     }
 
     @Override

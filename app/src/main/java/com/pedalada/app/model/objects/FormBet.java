@@ -7,7 +7,7 @@ public class FormBet {
 
     private double odd;
 
-    @SerializedName("fixture    ")
+    @SerializedName("fixture")
     private String fixture;
 
     private Bet bet;

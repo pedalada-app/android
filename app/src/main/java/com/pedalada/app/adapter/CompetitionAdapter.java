@@ -2,6 +2,7 @@ package com.pedalada.app.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ public class CompetitionAdapter extends ExpandableRecyclerAdapter<CompetitionVie
     private BetClickListener listener;
 
     private Map<String, Bet> betMap = Maps.newHashMap();
+
+    private Map<String, Pair<Integer, Integer>> positions = Maps.newHashMap();
 
     public CompetitionAdapter(Context context, @NonNull List<Competition> parentItemList, BetClickListener listener) {
 
@@ -87,10 +90,10 @@ public class CompetitionAdapter extends ExpandableRecyclerAdapter<CompetitionVie
 
         parentItemList.addAll(competitionList);
 
-        notifyChange();
     }
 
     public void updateItems(Map<String, List<Fixture>> compToFixtures) {
+
 
         for (int i = 0, parentItemListSize = parentItemList.size(); i < parentItemListSize; i++) {
 
@@ -98,6 +101,12 @@ public class CompetitionAdapter extends ExpandableRecyclerAdapter<CompetitionVie
             final String competitionId = competition.getCompId();
             final List<Fixture> fixtures = compToFixtures.get(competitionId);
             competition.setFixtures(fixtures);
+
+            for (int i1 = 0, fixturesSize = fixtures.size(); i1 < fixturesSize; i1++) {
+                Fixture fixture = fixtures.get(i1);
+
+                positions.put(fixture.getFixtureId(), Pair.create(i, i1));
+            }
 
         }
 
@@ -107,19 +116,17 @@ public class CompetitionAdapter extends ExpandableRecyclerAdapter<CompetitionVie
 
     public void addBet(Fixture fixture, Bet bet) {
 
-        betMap.put(fixture.getFixtureId(), bet);
+        final String fixtureId = fixture.getFixtureId();
+        betMap.put(fixtureId, bet);
 
-        notifyChange();
-    }
+        final Pair<Integer, Integer> fixPos = positions.get(fixtureId);
+        notifyChildItemChanged(fixPos.first, fixPos.second);
 
-    private void notifyChange() {
-
-        notifyParentItemRangeChanged(0, parentItemList.size());
     }
 
     public void removeAllBets() {
 
         betMap.clear();
-        notifyChange();
+
     }
 }

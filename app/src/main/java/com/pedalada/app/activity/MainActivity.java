@@ -51,6 +51,7 @@ public class MainActivity extends BaseActivity {
         final Prefs prefs = MyApplication.get(this).getPrefs();
         if (!prefs.isLoggedin()) {
             LoginActivity.start(this);
+            finish();
             return;
         }
 

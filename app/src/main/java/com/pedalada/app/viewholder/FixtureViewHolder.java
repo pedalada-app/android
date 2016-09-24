@@ -13,20 +13,21 @@ import com.pedalada.app.model.objects.FixtureResult;
 import com.pedalada.app.model.objects.FixtureStatus;
 
 import java.text.MessageFormat;
+import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 public class FixtureViewHolder extends ChildViewHolder {
 
-    @BindView(R.id.item_fixture_hometeam_wrapper)
-    View homeTeamWrapper;
+    private static final ButterKnife.Action<View> CLICKABLE = (view, index) -> view.setClickable(true);
 
-    @BindView(R.id.item_fixture_draw_wrapper)
-    View drawWrapper;
+    private static final ButterKnife.Action<View> DISABLE_CLICKABLE = (view, index) -> view.setClickable(true);
 
-    @BindView(R.id.item_fixture_away_wrapper)
-    View awayWrapper;
+    @BindViews({R.id.item_fixture_hometeam_wrapper, R.id.item_fixture_draw_wrapper, R.id.item_fixture_away_wrapper})
+    List<View> wrappers;
+
 
     @BindView(R.id.item_fixture_hometeam)
     TextView homeTeam;
@@ -67,9 +68,9 @@ public class FixtureViewHolder extends ChildViewHolder {
         drawBetButtonListener = new BetButtonListener();
         awayBetButtonListener = new BetButtonListener();
 
-        homeTeamWrapper.setOnClickListener(homeBetButtonListener);
-        awayWrapper.setOnClickListener(awayBetButtonListener);
-        drawWrapper.setOnClickListener(drawBetButtonListener);
+        wrappers.get(0).setOnClickListener(homeBetButtonListener);
+        wrappers.get(1).setOnClickListener(awayBetButtonListener);
+        wrappers.get(2).setOnClickListener(drawBetButtonListener);
 
     }
 
@@ -87,32 +88,30 @@ public class FixtureViewHolder extends ChildViewHolder {
             awayTeamOdds.setText(formatedOdds(fixtureOdds.getAwayWin()));
             drawOdds.setText(formatedOdds(fixtureOdds.getDraw()));
 
-            drawWrapper.setVisibility(View.VISIBLE);
-            homeTeamWrapper.setClickable(true);
-            awayWrapper.setClickable(true);
+            ButterKnife.apply(wrappers, CLICKABLE);
+            ButterKnife.apply(wrappers, new ButterKnife.Action<View>() {
+
+                @Override
+                public void apply(@NonNull View view, int index) {
+
+                    if (currentBet.ordinal() == index) {
+                        view.setBackgroundResource(R.color.fixture_bet_click);
+                    } else {
+                        view.setBackgroundResource(0x0);
+                    }
+
+                }
+
+            });
 
             updateListener(homeBetButtonListener, fixture, Bet.HOME, currentBet, listener);
             updateListener(awayBetButtonListener, fixture, Bet.AWAY, currentBet, listener);
             updateListener(drawBetButtonListener, fixture, Bet.DRAW, currentBet, listener);
 
-            switch (currentBet) {
-                case HOME:
-                    homeTeamWrapper.setBackgroundResource(R.color.fixture_bet_click);
-                    break;
-                case AWAY:
-                    awayWrapper.setBackgroundResource(R.color.fixture_bet_click);
-                    break;
-                case DRAW:
-                    drawWrapper.setBackgroundResource(R.color.fixture_bet_click);
-                    break;
-                case NONE:
-                    break;
-            }
+
         } else {
 
-            drawWrapper.setVisibility(View.INVISIBLE);
-            homeTeamWrapper.setClickable(false);
-            awayWrapper.setClickable(false);
+            ButterKnife.apply(wrappers, DISABLE_CLICKABLE);
 
             homeTeamOdds.setText(String.format("%d", result.getHomeTeamGoals()));
             awayTeamOdds.setText(String.format("%d", result.getAwayTeamGoals()));

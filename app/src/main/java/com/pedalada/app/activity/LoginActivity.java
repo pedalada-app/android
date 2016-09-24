@@ -13,7 +13,6 @@ import com.pedalada.app.MyApplication;
 import com.pedalada.app.R;
 import com.pedalada.app.model.Prefs;
 import com.pedalada.app.model.network.BackendService;
-import com.pedalada.app.model.objects.User;
 import com.pedalada.app.presenter.LoginPresenter;
 import com.pedalada.app.view.LoginView;
 
@@ -125,6 +124,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     public void proceedToNext() {
 
         MainActivity.start(this);
+        finish();
 
     }
 }

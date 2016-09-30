@@ -32,7 +32,7 @@ android {
         }
         debug {
             buildConfigField "boolean", "REPORT_CRASHES", "false"
-            buildConfigField "String", "BACKEND_URL", $/"http://132.65.120.145:8080/"/$
+            buildConfigField "String", "BACKEND_URL", $/"https://pedalada-backend-server.mybluemix.net/"/$
         }
     }
 

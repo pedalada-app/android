@@ -98,6 +98,9 @@ public class CompetitionFragment extends BaseFragment implements CompetitionView
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        recyclerView.getItemAnimator().setAddDuration(500);
+        recyclerView.getItemAnimator().setRemoveDuration(500);
+
         adapter = new CompetitionAdapter(context, Lists.newArrayList(), this);
 
         recyclerView.setAdapter(adapter);

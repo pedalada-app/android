@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "989705648534",
+    "firebase_url": "https://pedalada-9c05d.firebaseio.com",
+    "project_id": "pedalada-9c05d",
+    "storage_bucket": "pedalada-9c05d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989705648534:android:d5e8f8a3f599f344",
+        "android_client_info": {
+          "package_name": "com.pedalada.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989705648534-1uo84enovo50h5v7p14g3i1us03l6kol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3_Dp_R5xgDFwv46yZPz0I153z_tTBz74"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

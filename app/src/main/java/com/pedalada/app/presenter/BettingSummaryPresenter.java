@@ -62,6 +62,10 @@ public class BettingSummaryPresenter extends BasePresenter<BettingSummaryView> {
 
     private void submitForm(Void aVoid) {
 
+        if (betAmount == 0) {
+            return;
+        }
+
         final NewFormRequest request = NewFormRequest.fromBettingForm(bettingForm, betAmount);
 
         final Subscription subscription = backendService.submitForm(request).subscribe(res -> {

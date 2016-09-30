@@ -4,7 +4,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="16dp">
 
 
     <TextView
@@ -37,12 +37,30 @@
         android:layout_marginTop="4dp"
         tools:text="Status: IN PROGRESS"/>
 
+    <TextView
+        android:id="@+id/form_games_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/form_status"
+        android:layout_marginTop="8dp"
+        android:scrollbars="vertical"
+        android:text="@string/games"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/form_games_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:background="@android:color/darker_gray"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/form_fixtures_list"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scrollbars="vertical"
-        android:layout_below="@id/form_status"
+        android:layout_height="match_parent"
+        android:layout_below="@id/form_games_title"
         android:layout_marginTop="8dp">
 
     </android.support.v7.widget.RecyclerView>

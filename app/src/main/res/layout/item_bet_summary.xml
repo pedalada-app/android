@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:padding="16dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
 
     <TextView
         android:id="@+id/bet_summary_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Chelsea v Arsenal"/>
+        tools:text="Chelsea v Arsenal" />
 
     <TextView
         android:id="@+id/bet_summary_bet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:text="Chelsea (1.3)"/>
+        android:layout_marginTop="5dp"
+        tools:text="Chelsea (1.3)" />
 
 </LinearLayout>

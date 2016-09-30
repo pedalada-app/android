@@ -1,5 +1,6 @@
 package com.pedalada.app.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     private LoginPresenter loginPresenter;
 
     private PublishSubject<LoginResult> loginResultPublishSubject = PublishSubject.create();
+    private ProgressDialog progressDialog;
 
     public static void start(Context context) {
 
@@ -126,5 +128,15 @@ public class LoginActivity extends BaseActivity implements LoginView {
         MainActivity.start(this);
         finish();
 
+    }
+
+    @Override
+    public void showProgress() {
+        progressDialog = ProgressDialog.show(this, "Login", "Please Wait...", true);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressDialog.dismiss();
     }
 }

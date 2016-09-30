@@ -29,14 +29,12 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
         loginView = view;
 
-        view.showProgress();
-
         final Subscription subscription = view.successfulLogin()
-                                              .flatMap(result -> backendService.auth(result.getAccessToken()
-                                                                                           .getToken(), null,
-                                                      FirebaseInstanceId.getInstance().getToken()))
-                                              .subscribe(this::successfulSignin, this::unsuccessfulSignin,
-                                                      view::hideProgress);
+                .doOnNext(r -> view.showProgress())
+                .flatMap(result -> backendService.auth(result.getAccessToken()
+                                .getToken(), null,
+                        FirebaseInstanceId.getInstance().getToken()))
+                .subscribe(this::successfulSignin, this::unsuccessfulSignin);
 
         addSubscriptions(subscription);
 
@@ -54,6 +52,8 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     private void successfulSignin(AuthResult authResult) {
 
         Timber.d("Result: %s ", authResult);
+
+        loginView.hideProgress();
 
         prefs.setToken(authResult.getToken());
 

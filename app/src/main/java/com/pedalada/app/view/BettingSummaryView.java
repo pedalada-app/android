@@ -19,4 +19,6 @@ public interface BettingSummaryView extends BaseView {
     void hide();
 
     void setMaxPedaladas(int val);
+
+    void showFormSuccessfullySubmitted();
 }

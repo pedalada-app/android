@@ -3,6 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="fixture_bet_click">#785A55</color>
+    <color name="fixture_bet_click">#FF4081</color>
     <color name="fixture_bet">#ABCD45</color>
 </resources>

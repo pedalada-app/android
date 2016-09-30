@@ -28,7 +28,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "boolean", "REPORT_CRASHES", "true"
-            buildConfigField "String", "BACKEND_URL", ""
+            buildConfigField "String", "BACKEND_URL", $/"https://pedalada-backend-server.mybluemix.net/"/$
         }
         debug {
             buildConfigField "boolean", "REPORT_CRASHES", "false"

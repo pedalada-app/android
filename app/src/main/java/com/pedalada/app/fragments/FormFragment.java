@@ -95,7 +95,7 @@ public class FormFragment extends BaseFragment implements FormView {
 
         getActivity().runOnUiThread(() -> {
             formDateTv.setText(userForm.getName());
-            formStatusTv.setText(String.format("Status: %s", userForm.getStatus()));
+            formStatusTv.setText(String.format("Status: %s", userForm.getStatus().displayed()));
             formExpectedRevenue.setText(String.format("Expected Revenue: %d", userForm.getExpectedWinning()));
             formPedaladaTv.setText(String.format("Pedalada form: %d", userForm.getPedaladas()));
 

@@ -11,5 +11,20 @@ public enum FormStatus {
     WINNER,
 
     @SerializedName("loser")
-    LOSER
+    LOSER;
+
+    public String displayed() {
+
+        switch (this) {
+            case IN_PROGRESS:
+                return "In Progress";
+            case WINNER:
+                return "Winner";
+            case LOSER:
+                return "Loser";
+            default:
+                return super.toString();
+        }
+
+    }
 }

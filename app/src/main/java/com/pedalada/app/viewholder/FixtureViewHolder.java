@@ -11,6 +11,7 @@ import com.pedalada.app.model.objects.Fixture;
 import com.pedalada.app.model.objects.FixtureOdds;
 import com.pedalada.app.model.objects.FixtureResult;
 import com.pedalada.app.model.objects.FixtureStatus;
+import com.pedalada.app.utils.DateUtils;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -48,6 +49,9 @@ public class FixtureViewHolder extends ChildViewHolder {
     @BindView(R.id.item_fixture_draw_odds)
     TextView drawOdds;
 
+    @BindView(R.id.item_fixture_date)
+    TextView dateView;
+
     private BetButtonListener homeBetButtonListener;
 
     private BetButtonListener awayBetButtonListener;
@@ -78,6 +82,10 @@ public class FixtureViewHolder extends ChildViewHolder {
     public void bind(Fixture fixture, Bet currentBet, BetClickListener listener) {
 
         Timber.d(String.format("bind() called with: fixture = [%s], currentBet = [%s], listener = [%s]", fixture, currentBet, listener));
+
+        final String formattedDate = DateUtils.formatDate(fixture.getDate());
+
+        dateView.setText(formattedDate);
 
         homeTeam.setText(fixture.getHomeTeam().getName());
         awayTeam.setText(fixture.getAwayTeam().getName());

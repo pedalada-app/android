@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.pedalada.app.model.Bet;
 import com.pedalada.app.model.FixtureBet;
 import com.pedalada.app.model.network.BettingForm;
+import com.pedalada.app.utils.DateUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ public class NewFormRequest {
 
     private int pedaladas;
 
-    private String name = new Date().toString();
+    private String name = DateUtils.formatDate(new Date());
 
     private int expectedWinning;
 
@@ -22,7 +23,7 @@ public class NewFormRequest {
 
     }
 
-    public NewFormRequest(List<FormBet> formBet, int pedaladas, int expectedWinning) {
+    private NewFormRequest(List<FormBet> formBet, int pedaladas, int expectedWinning) {
 
         this.bets = formBet;
         this.pedaladas = pedaladas;

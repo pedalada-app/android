@@ -2,60 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="100dp"
+              android:layout_height="wrap_content"
               android:gravity="center"
-              android:orientation="horizontal"
+              android:orientation="vertical"
               android:padding="4dp">
 
-    <RelativeLayout
-        android:id="@+id/item_fixture_hometeam_wrapper"
-        style="@style/item_fixture_team_wrapper">
-
-        <TextView
-            android:id="@+id/item_fixture_hometeam"
-            style="@style/item_fixture_team_name"
-            tools:text="Chelsea"/>
-
-        <TextView
-            android:id="@+id/item_fixture_hometeam_odds"
-            style="@style/item_fixture_team_odd"
-            android:layout_below="@id/item_fixture_hometeam"
-            tools:text="(1.3)"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/item_fixture_draw_wrapper"
-        style="@style/item_fixture_team_wrapper">
-
-        <TextView
-            android:id="@+id/item_fixture_draw"
-            style="@style/item_fixture_team_name"
-            android:text="@string/draw"/>
+    <TextView
+        android:id="@+id/item_fixture_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        tools:text="HI hello"/>
 
 
-        <TextView
-            android:id="@+id/item_fixture_draw_odds"
-            style="@style/item_fixture_team_odd"
-            android:layout_below="@id/item_fixture_draw"
-            tools:text="(1.3)"/>
+    <View
+        style="@style/comp_fixture_line"/>
 
-    </RelativeLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="center"
+                  android:orientation="horizontal">
 
-    <RelativeLayout
-        android:id="@+id/item_fixture_away_wrapper"
-        style="@style/item_fixture_team_wrapper">
+        <LinearLayout
+            android:id="@+id/item_fixture_hometeam_wrapper"
+            style="@style/item_fixture_team_wrapper">
 
-        <TextView
-            android:id="@+id/item_fixture_awayteam"
-            style="@style/item_fixture_team_name"
-            tools:text="Chelsea"/>
+            <TextView
+                android:id="@+id/item_fixture_hometeam"
+                style="@style/item_fixture_team_name"
+                tools:text="Chelsea"/>
 
-        <TextView
-            android:id="@+id/item_fixture_awayteam_odds"
-            style="@style/item_fixture_team_odd"
-            android:layout_below="@id/item_fixture_awayteam"
-            tools:text="(1.3)"/>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/item_fixture_hometeam_odds"
+                style="@style/item_fixture_team_odd"
+                tools:text="(1.3)"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/item_fixture_draw_wrapper"
+            style="@style/item_fixture_team_wrapper">
+
+            <TextView
+                android:id="@+id/item_fixture_draw"
+                style="@style/item_fixture_team_name"
+                android:text="@string/draw"/>
+
+
+            <TextView
+                android:id="@+id/item_fixture_draw_odds"
+                style="@style/item_fixture_team_odd"
+                tools:text="(1.3)"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/item_fixture_away_wrapper"
+            style="@style/item_fixture_team_wrapper"
+            >
+
+            <TextView
+                android:id="@+id/item_fixture_awayteam"
+                style="@style/item_fixture_team_name"
+                tools:text="Chelsea"/>
+
+            <TextView
+                android:id="@+id/item_fixture_awayteam_odds"
+                style="@style/item_fixture_team_odd"
+                tools:text="(1.3)"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        style="@style/comp_fixture_line"/>
 
 </LinearLayout>

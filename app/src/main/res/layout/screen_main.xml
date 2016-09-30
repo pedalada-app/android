@@ -26,6 +26,7 @@
         android:id="@+id/main_navview"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        app:headerLayout="@layout/main_navview_header"
         android:layout_gravity="start"
         android:background="@android:color/white"
         app:menu="@menu/main_drawer_menu"/>

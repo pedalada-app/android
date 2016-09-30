@@ -1,11 +1,14 @@
 package com.pedalada.app.model.objects;
 
+import com.google.gson.annotations.SerializedName;
+
 public class AuthResult {
 
     private String token;
 
     private String name;
 
+    @SerializedName("photoURL")
     private String photoUrl;
 
     private int pedaladas;

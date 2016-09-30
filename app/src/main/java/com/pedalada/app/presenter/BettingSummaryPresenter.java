@@ -68,7 +68,10 @@ public class BettingSummaryPresenter extends BasePresenter<BettingSummaryView> {
 
             prefs.addPedalada(-betAmount);
 
+            view.showFormSuccessfullySubmitted();
+
             view.hide();
+
 
         }, RxUtils::onError);
         addSubscriptions(subscription);

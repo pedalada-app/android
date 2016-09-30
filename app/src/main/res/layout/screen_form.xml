@@ -40,9 +40,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/form_fixtures_list"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
         android:layout_below="@id/form_status"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="8dp"
+        android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
 

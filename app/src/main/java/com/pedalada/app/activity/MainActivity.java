@@ -131,6 +131,9 @@ public class MainActivity extends BaseActivity {
             case R.id.nav_forms:
                 showFragment(FormHistoryFragment.newInstance(), true);
                 break;
+            case R.id.nav_leagues:
+            case R.id.nav_prizes:
+                break;
             default:
                 throw new IllegalStateException();
         }

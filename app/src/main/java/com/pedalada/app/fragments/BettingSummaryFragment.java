@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.common.collect.Lists;
 import com.jakewharton.rxbinding.view.RxView;
@@ -147,7 +148,7 @@ public class BettingSummaryFragment extends DialogFragment implements BettingSum
     @Override
     public void hide() {
 
-        dismiss();
+        getActivity().runOnUiThread(this::dismiss);
 
     }
 
@@ -155,6 +156,12 @@ public class BettingSummaryFragment extends DialogFragment implements BettingSum
     public void setMaxPedaladas(int val) {
 
         pedaladaPicker.setMaxValue(val);
+    }
+
+    @Override
+    public void showFormSuccessfullySubmitted() {
+        getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
+                "You Successfully submitted Your Form", Toast.LENGTH_SHORT).show());
     }
 
 

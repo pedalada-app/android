@@ -33,10 +33,10 @@ public class CompetitionViewHolder extends ParentViewHolder {
             @Override
             public void onClick(View v) {
                 if (isExpanded()) {
-                    mArrowExpandImageView.setImageResource(R.drawable.arrow_down);
+                    mArrowExpandImageView.setImageResource(R.mipmap.ball_down);
                     collapseView();
                 } else {
-                    mArrowExpandImageView.setImageResource(R.drawable.arrow_down_selected);
+                    mArrowExpandImageView.setImageResource(R.mipmap.ball_down_selected);
                     expandView();
                 }
             }
@@ -63,9 +63,9 @@ public class CompetitionViewHolder extends ParentViewHolder {
     public void onExpansionToggled(boolean expanded) {
         super.onExpansionToggled(expanded);
         if (expanded) {
-            mArrowExpandImageView.setImageResource(R.drawable.arrow_down);
+            mArrowExpandImageView.setImageResource(R.mipmap.ball_down);
         } else {
-            mArrowExpandImageView.setImageResource(R.drawable.arrow_down_selected);
+            mArrowExpandImageView.setImageResource(R.mipmap.ball_down_selected);
         }
     }
 }

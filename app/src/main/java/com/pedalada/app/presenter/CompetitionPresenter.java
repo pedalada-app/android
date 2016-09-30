@@ -1,7 +1,6 @@
 package com.pedalada.app.presenter;
 
 import com.google.common.collect.Maps;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.pedalada.app.model.FixtureBet;
 import com.pedalada.app.model.Prefs;
 import com.pedalada.app.model.network.BackendService;
@@ -19,7 +18,6 @@ import java.util.Map;
 
 import rx.Observable;
 import rx.Subscription;
-import timber.log.Timber;
 
 public class CompetitionPresenter extends BasePresenter<CompetitionView> {
 
@@ -58,7 +56,7 @@ public class CompetitionPresenter extends BasePresenter<CompetitionView> {
             if (res.getDailyChange() > 0) {
                 view.dailyBonusMessage(res.getDailyChange());
             }
-        }, RxUtils::onError);
+        }, RxUtils::onError, view::hideProgress);
         addSubscriptions(subscription1);
 
         final Observable<List<Competition>> competitionList = competitionRepository.getCompetitionList()

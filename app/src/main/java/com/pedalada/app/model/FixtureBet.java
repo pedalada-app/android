@@ -61,4 +61,13 @@ public class FixtureBet implements Parcelable {
         dest.writeParcelable(this.fixture, flags);
         dest.writeInt(this.bet == null ? -1 : this.bet.ordinal());
     }
+
+    @Override
+    public String toString() {
+
+        return "FixtureBet{" +
+                "fixture=" + fixture +
+                ", bet=" + bet +
+                '}';
+    }
 }

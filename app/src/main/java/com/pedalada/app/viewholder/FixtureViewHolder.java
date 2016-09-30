@@ -18,12 +18,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class FixtureViewHolder extends ChildViewHolder {
 
     private static final ButterKnife.Action<View> CLICKABLE = (view, index) -> view.setClickable(true);
 
-    private static final ButterKnife.Action<View> DISABLE_CLICKABLE = (view, index) -> view.setClickable(true);
+    private static final ButterKnife.Action<View> DISABLE_CLICKABLE = (view, index) -> view.setClickable(false);
 
     @BindViews({R.id.item_fixture_hometeam_wrapper, R.id.item_fixture_draw_wrapper, R.id.item_fixture_away_wrapper})
     List<View> wrappers;
@@ -76,14 +77,20 @@ public class FixtureViewHolder extends ChildViewHolder {
 
     public void bind(Fixture fixture, Bet currentBet, BetClickListener listener) {
 
+        Timber.d(String.format("bind() called with: fixture = [%s], currentBet = [%s], listener = [%s]", fixture, currentBet, listener));
 
         homeTeam.setText(fixture.getHomeTeam().getName());
         awayTeam.setText(fixture.getAwayTeam().getName());
 
         final FixtureResult result = fixture.getResult();
-        if (true || fixture.getFixtureStatus() == FixtureStatus.TIMED) {
+        if (fixture.getStatus() == FixtureStatus.TIMED) {
 
-            final FixtureOdds fixtureOdds = fixture.getOdds();
+            FixtureOdds fixtureOdds = fixture.getOdds();
+
+            if (fixtureOdds == null) {
+                fixtureOdds = new FixtureOdds(1, 1, 1);
+            }
+
             homeTeamOdds.setText(formatedOdds(fixtureOdds.getHomeWin()));
             awayTeamOdds.setText(formatedOdds(fixtureOdds.getAwayWin()));
             drawOdds.setText(formatedOdds(fixtureOdds.getDraw()));
@@ -150,11 +157,10 @@ public class FixtureViewHolder extends ChildViewHolder {
         @Override
         public void onClick(View view) {
 
-            if (listener == null) {
-                throw new IllegalStateException("BetButtonListener is null");
+            if (listener != null) {
+                listener.bet(fixture, userBet);
             }
 
-            listener.bet(fixture, userBet);
         }
     }
 }

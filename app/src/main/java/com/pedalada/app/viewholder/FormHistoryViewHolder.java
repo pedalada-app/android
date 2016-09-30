@@ -37,7 +37,7 @@ public class FormHistoryViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(UserForm userForm) {
 
-        dateTextView.setText("" + userForm.getDate());
+        dateTextView.setText("" + userForm.getName());
         pedaladaCountTv.setText("" + userForm.getPedaladas());
         statusTv.setText(userForm.getStatus().name());
 

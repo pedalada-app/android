@@ -37,7 +37,7 @@ public class Fixture implements Parcelable {
 
     private FixtureResult result;
 
-    private FixtureStatus fixtureStatus;
+    private FixtureStatus status = FixtureStatus.TIMED;
 
     public Fixture() {
 
@@ -53,7 +53,7 @@ public class Fixture implements Parcelable {
         this.date = tmpDate == -1 ? null : new Date(tmpDate);
         this.result = in.readParcelable(FixtureResult.class.getClassLoader());
         int tmpFixtureStatus = in.readInt();
-        this.fixtureStatus = tmpFixtureStatus == -1 ? null : FixtureStatus.values()[tmpFixtureStatus];
+        this.status = tmpFixtureStatus == -1 ? null : FixtureStatus.values()[tmpFixtureStatus];
     }
 
     @Override
@@ -74,6 +74,7 @@ public class Fixture implements Parcelable {
 
     }
 
+
     @Override
     public String toString() {
 
@@ -84,6 +85,7 @@ public class Fixture implements Parcelable {
                 ", odds=" + odds +
                 ", date=" + date +
                 ", result=" + result +
+                ", status=" + status +
                 '}';
     }
 
@@ -117,9 +119,9 @@ public class Fixture implements Parcelable {
         return result;
     }
 
-    public FixtureStatus getFixtureStatus() {
+    public FixtureStatus getStatus() {
 
-        return fixtureStatus;
+        return status;
     }
 
     @Override
@@ -137,6 +139,6 @@ public class Fixture implements Parcelable {
         dest.writeParcelable(this.odds, flags);
         dest.writeLong(this.date != null ? this.date.getTime() : -1);
         dest.writeParcelable(this.result, flags);
-        dest.writeInt(this.fixtureStatus == null ? -1 : this.fixtureStatus.ordinal());
+        dest.writeInt(this.status == null ? -1 : this.status.ordinal());
     }
 }

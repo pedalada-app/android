@@ -23,7 +23,7 @@ public class BackendServiceFactory {
 
     public BackendService create(Prefs prefs) {
 
-        Gson gson = new Gson();
+        final Gson gson = new Gson();
 
         final HttpLoggingInterceptor.Logger logger = message -> Timber.tag("OkHttp").d(message);
 

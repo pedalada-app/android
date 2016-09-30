@@ -19,8 +19,10 @@ public class FormHistoryPresenter extends BasePresenter<FormHistoryView> {
     @Override
     public void attachView(FormHistoryView view) {
 
+        view.showProgress();
+
         final Subscription subscription = backendService.getForms()
-                                                        .subscribe(view::showForms, RxUtils::onError);
+                                                        .subscribe(view::showForms, RxUtils::onError, view::hideProgress);
         addSubscriptions(subscription);
 
         final Subscription subscription1 = view.onFormClicked()

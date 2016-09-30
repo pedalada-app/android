@@ -8,4 +8,5 @@
     <string name="currency_text">Pedalada</string>
     <string name="nav_forms">Forms</string>
     <string name="nav_home">Home</string>
+    <string name="form_history_title">My Forms:</string>
 </resources>

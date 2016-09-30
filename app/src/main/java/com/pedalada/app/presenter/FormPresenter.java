@@ -26,8 +26,10 @@ public class FormPresenter extends BasePresenter<FormView> {
     @Override
     public void attachView(FormView view) {
 
+        view.showProgress();
+
         final Subscription subscription = backendService.getForm(formId)
-                                                        .subscribe(view::showForm, RxUtils::onError);
+                                                        .subscribe(view::showForm, RxUtils::onError, view::hideProgress);
         addSubscriptions(subscription);
 
     }

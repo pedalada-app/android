@@ -2,7 +2,6 @@ package com.pedalada.app.model.objects;
 
 import com.pedalada.app.model.FixtureBet;
 
-import java.util.Date;
 import java.util.List;
 
 public class UserForm {
@@ -17,9 +16,7 @@ public class UserForm {
 
     private FormStatus status;
 
-    private List<FixtureBet> fixtureList;
-
-    private Date date;
+    private List<FixtureBet> bets;
 
     public UserForm() {
 
@@ -50,13 +47,21 @@ public class UserForm {
         return status;
     }
 
-    public Date getDate() {
+    public List<FixtureBet> getBets () {
 
-        return date;
+        return bets;
     }
 
-    public List<FixtureBet> getFixtureList() {
+    @Override
+    public String toString() {
 
-        return fixtureList;
+        return "UserForm{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", pedaladas=" + pedaladas +
+                ", expectedWinning=" + expectedWinning +
+                ", status=" + status +
+                ", bets=" + bets +
+                '}';
     }
 }

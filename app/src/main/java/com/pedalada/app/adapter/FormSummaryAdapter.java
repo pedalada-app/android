@@ -51,6 +51,7 @@ public class FormSummaryAdapter extends RecyclerView.Adapter<BetSummaryViewHolde
     public void showList(List<FixtureBet> betList) {
 
         bets.addAll(betList);
+        notifyDataSetChanged();
 
     }
 }

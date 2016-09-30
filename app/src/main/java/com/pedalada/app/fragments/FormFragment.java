@@ -20,6 +20,7 @@ import com.pedalada.app.view.FormView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class FormFragment extends BaseFragment implements FormView {
 
@@ -90,11 +91,16 @@ public class FormFragment extends BaseFragment implements FormView {
     @Override
     public void showForm(UserForm userForm) {
 
-        formDateTv.setText("" + userForm.getDate());
-        formStatusTv.setText(String.format("Status: %s", userForm.getStatus()));
-        formExpectedRevenue.setText(String.format("Expected Revenue: %d", userForm.getExpectedWinning()));
-        formPedaladaTv.setText(String.format("Pedalada form: %d", userForm.getPedaladas()));
+        Timber.d("showForm() userForm=[%s]", userForm);
 
-        adapter.showList(userForm.getFixtureList());
+        getActivity().runOnUiThread(() -> {
+            formDateTv.setText(userForm.getName());
+            formStatusTv.setText(String.format("Status: %s", userForm.getStatus()));
+            formExpectedRevenue.setText(String.format("Expected Revenue: %d", userForm.getExpectedWinning()));
+            formPedaladaTv.setText(String.format("Pedalada form: %d", userForm.getPedaladas()));
+
+            adapter.showList(userForm.getBets());
+
+        });
     }
 }
